@@ -151,8 +151,10 @@ class TelegramBotHandler {
         const trips = await this.loadTrips(date);
         return Object.values(trips)
             .filter(trip => {
-                const depTime = +trip.departure_time.split(":")[0];
-                return trip.free_seats > 0 && depTime >= time && trip.active;
+                // const depTime = +trip.departure_time.split(":")[0];
+                // return trip.free_seats > 0 && depTime >= time && trip.active;
+                const routeDate = trip.datetime.split("T")[0];
+                return routeDate === date && trip.free_seats > 0 && trip.active;
             });
     }
 
